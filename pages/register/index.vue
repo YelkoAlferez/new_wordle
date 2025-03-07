@@ -19,7 +19,19 @@
                     Inicia sesión para acceder a tu cuenta
                   </p>
                 </div>
-                <form class="space-y-4 md:space-y-6" @submit.prevent="login">
+                <form class="space-y-4 md:space-y-6" @submit.prevent="register">
+                  <div>
+                    <label for="name" class="block mb-2 text-sm text-font-50 dark:text-white">Nombre</label>
+                    <input
+                      id="name"
+                      v-model="name"
+                      type="text"
+                      name="name"
+                      class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Introduce tu nombre"
+                      required
+                    />
+                  </div>
                   <div>
                     <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correo electrónico</label>
                     <input
@@ -27,26 +39,53 @@
                       v-model="email"
                       type="email"
                       name="email"
-                      class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-wordleGreen focus:border-wordleGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="mi.nombre@dominio.com"
+                      class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="example@gmail.com"
                       required
                     />
                   </div>
                   <div>
-                    <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contraseña</label>
+                    <label for="username" class="block mb-2 text-sm text-font-50 dark:text-white">Nombre de usuario</label>
                     <input
-                      id="password"
-                      v-model="password"
-                      type="password"
-                      name="password"
-                      placeholder="••••••••"
-                      class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-wordleGreen focus:border-wordleGreen block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      id="username"
+                      v-model="username"
+                      type="text"
+                      name="username"
+                      class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Introduce un nombre de usuario"
                       required
                     />
                   </div>
+                  <div class="flex gap-2">
+                    <div class="w-1/2">
+                      <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contraseña</label>
+                      <input
+                        id="password"
+                        v-model="password"
+                        type="password"
+                        name="password"
+                        class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="••••••••"
+                        required
+                      />
+                    </div>
+                    <div class="w-1/2">
+                      <label for="repeatPassword" class="block mb-2 text-sm text-font-50 dark:text-white">Repetir contraseña</label>
+                      <input
+                        id="repeatPassword"
+                        v-model="repeatPassword"
+                        type="password"
+                        name="repeatPassword"
+                        placeholder="••••••••"
+                        class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div><p class="error text-red-500 hidden">Las contraseñas no coinciden</p></div>
                   <button
                     type="submit"
-                    class="w-full text-white bg-wordleGreen hover:bg-wordleGreen focus:ring-4 focus:outline-none focus:ring-wordleGreen-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-wordleGreen dark:hover:bg-wordleGreen dark:focus:ring-wordleGreen"
+                    class="w-full text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-500"
                   >
                     Iniciar sesión
                   </button>
@@ -54,7 +93,7 @@
                     <div class="ml-3 text-sm">
                       <label for="remember" class="text-font-50 dark:text-font-50">
                         ¿No tienes cuenta?
-                        <nuxt-link to="/" class="text-sm mb-2 text-wordleGreen hover:underline dark:text-wordleGreen">
+                        <nuxt-link to="/" class="text-sm mb-2 text-green-500 hover:underline dark:text-green-500">
                           Regístrate
                         </nuxt-link>
                       </label>
@@ -74,21 +113,34 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
 
+const name = ref('')
 const email = ref('')
+const username = ref('')
 const password = ref('')
+const repeatPassword = ref('')
 const router = useRouter()
 const user = useUser()
-const endpoint = 'http://new_wordle.test/api/login'
+const endpoint = 'http://new_wordle.test/api/register'
 
 
-async function login() {
-  console.log(email.value, password.value)
+async function register() {
   try {
+
+    if(password.value !== repeatPassword.value){
+      $('.error').show()
+      return;
+    }else{
+      $('.error').hide()
+    }
+
     const resp = await fetch(endpoint, {
       method: 'POST',
       body: JSON.stringify({
+        name: name.value,
         email: email.value,
+        username: username.value,
         password: password.value,
+        repeatPassword: repeatPassword.value,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -98,15 +150,22 @@ async function login() {
     const json = await resp.json()
 
     if (json.retCode == 200) {
-      localStorage.setItem('authToken', 'guniguni')
-      user.setUser(json.id, json.name, json.email)
+      Swal.fire({
+        title: 'Registrado con éxito',
+        icon: 'success',
+        text: 'El registro se ha completado con éxito',
+      })
       router.push('/')
     } else {
       Swal.fire({
-        title: 'Inicio de sesión incorrecto',
+        title: 'Error en el registro',
         icon: 'error',
-        text: 'Credenciales incorrectas, inténtalo de nuevo',
+        text: 'Ha habido un error al registrarse, inténtalo de nuevo',
       })
+      email.value = ''
+      username.value = ''
+      password.value = ''
+      repeatPassword.value = ''
     }
   } catch (error) {
     console.log(error)

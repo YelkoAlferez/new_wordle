@@ -4,13 +4,11 @@ export const useUser = defineStore('user', {
   state: () => ({
     id: '',
     name: '',
-    email: '',
   }),
   actions: {
-    setUser(id: string, name: string, email: string) {
+    setUser(id: string, name: string) {
       this.id = id
       this.name = name
-      this.email = email
     },
   },
   getters: {
@@ -19,9 +17,6 @@ export const useUser = defineStore('user', {
     },
     getName: state => {
       return state.name
-    },
-    getEmail: state => {
-      return state.email
-    },
+    }
   },
 })

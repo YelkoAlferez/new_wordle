@@ -79,7 +79,6 @@ import { useAuthStore } from '@/stores/authStore'
 const email = ref('')
 const password = ref('')
 const router = useRouter()
-const user = useUser()
 const auth = useAuthStore()
 const runtime = useRuntimeConfig().public.apiBase
 const endpoint = runtime + '/login'
@@ -102,10 +101,7 @@ async function login() {
     const json = await resp.json()
 
     if (json.retCode == 200) {
-      auth.login(json.token)
-
-      user.setUser(json.id, json.name, json.email)
-
+      auth.login(json)
       router.push('/home')
     } else {
       Swal.fire({

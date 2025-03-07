@@ -7,38 +7,47 @@
       >
         <h1 class="text-4xl font-bold mb-4">¡Bienvenido a WORDLE IBC!</h1>
         <p class="text-lg mb-6">
-          Nos alegra verte aquí, {{ name }}. Explora y disfruta de los divertidos
-          modos de juego.
+          Nos alegra verte aquí, {{ name }}
+          Que quieres hacer?
         </p>
-        <button
-          @click="logout"
-          class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition"
-        >
-          Logout
-        </button>
+        <div>
+          <button
+            @click="auth.logout"
+            class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition m-2"
+            >
+            Logout
+          </button>
+          <button
+            @click="play"
+            class="px-6 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition m-2"
+            >
+            Jugar
+          </button>
+        </div>
       </div>
     </div>
   </template>
   
-  <script lang="ts">
+<script lang="ts">
   import { useUser } from '@/stores/user'
   import { defineComponent, ref } from 'vue'
-
+  
   export default defineComponent({
     setup() {
       const user = useUser()
       const name = ref(user.getName)
-  
-      function logout() {
-        localStorage.removeItem('authToken') 
-        window.location.href = '/'
+      const auth = useAuthStore()
+
+      const play = () => {
+        navigateTo('/play')
       }
-  
+
       return {
         name,
-        logout,
+        auth,
+        play
       }
     },
   })
-  </script>
+</script>
   
