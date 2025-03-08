@@ -243,36 +243,41 @@ const checkWord = () => {
   const current = grid.value[currentRowIndex.value - 1];
   const word = current.letters.join("");
   let correct = 0;
+  let marked = Array(word.length).fill(false);
+  let wordToGuessArray = wordToGuess.value.split("");
+  let orangeCount: { [key: string]: number } = {}
+
+  wordToGuessArray.forEach(letter => {
+    orangeCount[letter] = (orangeCount[letter] || 0) + 1;
+  });
 
   word.split("").forEach((letter, index) => {
-    if (keyDataValues.value[letter] === undefined) {
-      keyDataValues.value[letter] = 0;
-    }
-
-    if (letter === wordToGuess.value[index]) {
+    if (letter === wordToGuessArray[index]) {
       letterColors.value[currentRowIndex.value - 1][index] = "bg-green-500";
-
-      if (keyDataValues.value[letter] < 3) {
-        keyColors.value[letter] = "bg-green-500";
-        keyDataValues.value[letter] = 3;
-      }
+      marked[index] = true; 
       correct++;
-    } else if (wordToGuess.value.includes(letter)) {
-      letterColors.value[currentRowIndex.value - 1][index] = "bg-yellow-500";
+      orangeCount[letter]--; 
+    }
+  });
 
-      if (keyDataValues.value[letter] < 2) {
-        keyColors.value[letter] = "bg-yellow-500";
-        keyDataValues.value[letter] = 2;
-      }
-    } else {
-      letterColors.value[currentRowIndex.value - 1][index] = "bg-gray-500";
-      if (keyDataValues.value[letter] < 1) {
-        keyColors.value[letter] = "bg-gray-500";
-        keyDataValues.value[letter] = 1;
+  word.split("").forEach((letter, index) => {
+    if (!marked[index] && wordToGuessArray.includes(letter)) {
+      if (orangeCount[letter] > 0) {
+        letterColors.value[currentRowIndex.value - 1][index] = "bg-yellow-500";
+        marked[index] = true; 
+        orangeCount[letter]--;
       }
     }
   });
 
+  // Marcar las letras que no están en la palabra como grises
+  word.split("").forEach((letter, index) => {
+    if (!marked[index]) {
+      letterColors.value[currentRowIndex.value - 1][index] = "bg-gray-500";
+    }
+  });
+
+  // Lógica para ganar o perder
   if (correct === 5) {
     gameOver.value = true;
     stopTimer();
