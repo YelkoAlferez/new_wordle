@@ -4,17 +4,21 @@
       <h1 class="text-5xl font-bold mb-6 text-white">¡WORDLE IBC!</h1>
       <div class="absolute top-5 left-5 p-4 flex gap-4 items-center">
         <button @click="auth.logout"
-          class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition m-2">
+          class="px-6 py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition">
           Logout
+        </button>
+        <button @click="showInfo"
+          class="px-6 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition">
+          Ajuda
         </button>
       </div>
       <div class="absolute top-5 right-5 p-4 flex gap-4 items-center">
-        <div class="text-lg mb-2">Intentos: {{ usedAttempts }}</div>
+        <div class="text-lg mb-2">Intents: {{ usedAttempts }}</div>
         <button @click="restartGame" class="px-4 py-2 bg-gray-700 text-white rounded-lg text-lg hover:bg-gray-600">
           Reiniciar
         </button>
         <button @click="showStats" class="px-4 py-2 bg-green-700 text-white rounded-lg text-lg hover:bg-green-600">
-          Ver Estadísticas
+          Veure estadístiques
         </button>
       </div>
       <div id="wordle-grid" class="flex flex-col items-center gap-2">
@@ -71,9 +75,9 @@ const keyColors = ref<Record<string, string>>({});
 const keyDataValues = ref<Record<string, number>>({});
 
 const letterSlices = [
-  [0, 10], // Fila 1
-  [10, 20], // Fila 2
-  [20, 26], // Fila 3
+  [0, 10],
+  [10, 20],
+  [20, 26],
 ];
 
 const grid = ref([
@@ -120,6 +124,34 @@ const stopTimer = () => {
   }
 };
 
+const showInfo = () => {
+  Swal.fire({
+  title: "Normes del Wordle",
+  html: `
+    <p><strong>🎯 Objectiu del joc:</strong> Endevina la paraula oculta de 5 lletres en un màxim de 6 intents.</p>
+    <p><strong>📝 Com jugar:</strong></p>
+    <ul style="text-align: left;">
+      <li>Introdueix una paraula vàlida de 5 lletres.</li>
+      <li>Després de cada intent, rebràs pistes:</li>
+      <ul>
+        <li>🟩 Verd: La lletra és correcta i està ben col·locada.</li>
+        <li>🟨 Groc: La lletra està a la paraula, però en una posició diferent.</li>
+        <li>⬜ Gris: La lletra no està a la paraula.</li>
+      </ul>
+    </ul>
+    <p><strong>⚠️ Regles:</strong></p>
+    <ul style="text-align: left;">
+      <li>Només s'accepten paraules reals de 5 lletres.</li>
+      <li>No es permeten noms propis ni abreviatures.</li>
+      <li>Has d'encertar la paraula abans d'esgotar els intents!</li>
+    </ul>
+  `,
+  icon: "info",
+  confirmButtonText: "D'acord"
+});
+
+}
+
 const showStats = async () => {
   const stats = await auth.getStats();
 
@@ -128,13 +160,13 @@ const showStats = async () => {
       title: "¡Estadísticas!",
       html: `<ul>
             <li>Total Stats: ${stats.totalStats}</li>
-            <li>Completados: ${stats.completedCount}</li>
-            <li>No Completados: ${stats.notCompletedCount}</li>
-            <li>Tiempo más rápido: ${stats.fastestCompletionTime} segundos</li>
-            <li>Tiempo promedio: ${stats.averageCompletionTime} segundos</li>
-            <li>Mejor partida: ${stats.minUsedAttempts == 1
-          ? stats.minUsedAttempts + " intento"
-          : stats.minUsedAttempts + "intentos"
+            <li>Completats: ${stats.completedCount}</li>
+            <li>No Completats: ${stats.notCompletedCount}</li>
+            <li>Temps més ràpid: ${stats.fastestCompletionTime != null ? stats.fastestCompletionTime + ' segons' : 'No hi ha registres'}</li>
+            <li>Mitjana de temps: ${stats.averageCompletionTime} segons</li>
+            <li>Millor partida: ${stats.minUsedAttempts == 1
+          ? stats.minUsedAttempts + " intent"
+          : stats.minUsedAttempts + " intents"
         }</li>
         </ul>`,
       icon: "info",
@@ -142,8 +174,8 @@ const showStats = async () => {
     });
   } else {
     Swal.fire({
-      title: "¡Estadísticas!",
-      text: "Todavía no tienes estadísticas",
+      title: "¡Estadístiques!",
+      text: "Encara no tens estadístiques",
       icon: "info",
       confirmButtonText: "OK",
     });
@@ -176,8 +208,8 @@ const submitRow = () => {
   if (!dic.includes(word.toLocaleLowerCase())) {
     setTimeout(async () => {
       Swal.fire({
-        title: "Palabra no válida",
-        text: "La palabra no existe en el diccionario.",
+        title: "Paraula no vàlida",
+        text: "La paraula no existeix al diccionari.",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -189,8 +221,8 @@ const submitRow = () => {
   if (usedWords.has(word)) {
     setTimeout(async () => {
       Swal.fire({
-        title: "Palabra repetida",
-        text: "Ya has introducido esta palabra antes.",
+        title: "Paraula repetida",
+        text: "Ja has introduit aquesta paraula abans.",
         icon: "warning",
         confirmButtonText: "OK",
       });
@@ -233,9 +265,9 @@ const checkWord = () => {
         keyDataValues.value[letter] = 2;
       }
     } else {
-      letterColors.value[currentRowIndex.value - 1][index] = "bg-red-500";
+      letterColors.value[currentRowIndex.value - 1][index] = "bg-gray-500";
       if (keyDataValues.value[letter] < 1) {
-        keyColors.value[letter] = "bg-red-500";
+        keyColors.value[letter] = "bg-gray-500";
         keyDataValues.value[letter] = 1;
       }
     }
@@ -247,8 +279,8 @@ const checkWord = () => {
     maxCorrectLetters.value = correct;
     setTimeout(async () => {
       Swal.fire({
-        title: "¡Has ganado!",
-        text: `¡Felicidades, adivinaste la palabra en ${completionTime.value} segundos!`,
+        title: "¡Has guanyat!",
+        text: `¡Felicitats, has endivinat la paraula en ${completionTime.value} segons!`,
         icon: "success",
         confirmButtonText: "OK",
       });
@@ -264,8 +296,8 @@ const checkWord = () => {
     stopTimer();
     setTimeout(async () => {
       Swal.fire({
-        title: "¡Has perdido!",
-        text: `La palabra era: ${wordToGuess.value}. Tiempo total: ${completionTime.value} segundos`,
+        title: "¡Has perdut!",
+        text: `La paraula era: ${wordToGuess.value}. Temps total: ${completionTime.value} segons`,
         icon: "error",
         confirmButtonText: "OK",
       });

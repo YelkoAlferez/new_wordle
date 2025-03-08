@@ -5,10 +5,10 @@
       <div
         class="text-center p-8 bg-white rounded-lg shadow-md max-w-md w-full text-gray-800"
       >
-        <h1 class="text-4xl font-bold mb-4">¡Bienvenido a WORDLE IBC!</h1>
+        <h1 class="text-4xl font-bold mb-4">¡Benvingut a WORDLE IBC!</h1>
         <p class="text-lg mb-6">
-          Nos alegra verte aquí, {{ name }}
-          Que quieres hacer?
+          Ens alegra veure't aqui, {{ name }}
+          Que vols fer?
         </p>
         <div>
           <button
