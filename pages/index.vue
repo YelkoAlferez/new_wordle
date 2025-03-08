@@ -13,15 +13,15 @@
             <div class="space-y-4 md:space-y-6">
               <div>
                 <h1 class="text-2xl leading-9 tracking-tight text-font-50 md:text-2xl text-gray-500 dark:text-white">
-                  Bienvenido/a
+                  Benvingut
                 </h1>
                 <p class="text-sm font-light text-gray-500 pt-2 dark:text-gray-400">
-                  Inicia sesión para acceder a tu cuenta
+                  Inicia sessió per accedir al teu compte
                 </p>
               </div>
               <form class="space-y-4 md:space-y-6" @submit.prevent="login">
                 <div>
-                  <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correo electrónico</label>
+                  <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correu electrónic</label>
                   <input
                     id="email"
                     v-model="email"
@@ -33,7 +33,7 @@
                   />
                 </div>
                 <div>
-                  <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contraseña</label>
+                  <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contrasenya</label>
                   <input
                     id="password"
                     v-model="password"
@@ -48,14 +48,14 @@
                   type="submit"
                   class="w-full text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green dark:hover:bg-green dark:focus:ring-green"
                 >
-                  Iniciar sesión
+                  Iniciar sessió
                 </button>
                 <div class="flex items-start">
                   <div class="ml-3 text-sm">
                     <label for="remember" class="text-font-50 dark:text-font-50">
-                      ¿No tienes cuenta?
+                      ¿No tens compte?
                       <nuxt-link to="/register" class="text-sm mb-2 text-green-500 hover:underline dark:text-green-700">
-                        Regístrate
+                        Registra't
                       </nuxt-link>
                     </label>
                   </div>
@@ -105,9 +105,9 @@ async function login() {
       router.push('/home')
     } else {
       Swal.fire({
-        title: 'Inicio de sesión incorrecto',
+        title: 'Inici de sessió incorrecte',
         icon: 'error',
-        text: 'Credenciales incorrectas, inténtalo de nuevo',
+        text: 'Credencials incorrectes, intenta-ho de nou',
       })
       email.value = ''
       password.value = ''
