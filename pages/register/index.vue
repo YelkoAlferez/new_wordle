@@ -41,26 +41,26 @@
                         type="text"
                         name="surname"
                         class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Introduceix el teu cognom"
+                        placeholder="Introdueix el teu cognom"
                         required
                       />
                     </div>
                   </div>
                   <div class="flex gap-2">
                     <div class="w-1/2">
-                      <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correu electrónic</label>
+                      <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correu electrònic</label>
                       <input
                         id="email"
                         v-model="email"
                         type="email"
                         name="email"
                         class="bg-gray-50 border border-gray-300 placeholder-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="example@gmail.com"
+                        placeholder="exemple@gmail.com"
                         required
                       />
                     </div>
                     <div class="w-1/2">
-                      <label for="phone" class="block mb-2 text-sm text-font-50 dark:text-white">Teléfon</label>
+                      <label for="phone" class="block mb-2 text-sm text-font-50 dark:text-white">Telèfon</label>
                       <input
                       id="phone"
                       v-model="phone"
@@ -86,7 +86,7 @@
                   </div>
                   <div class="flex gap-2">
                     <div class="w-1/2">
-                      <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contrasenya</label>
+                      <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contrassenya</label>
                       <input
                         id="password"
                         v-model="password"
@@ -98,7 +98,7 @@
                       />
                     </div>
                     <div class="w-1/2">
-                      <label for="repeatPassword" class="block mb-2 text-sm text-font-50 dark:text-white">Repetir contrasenya</label>
+                      <label for="repeatPassword" class="block mb-2 text-sm text-font-50 dark:text-white">Repetir contrassenya</label>
                       <input
                         id="repeatPassword"
                         v-model="repeatPassword"
@@ -115,12 +115,12 @@
                     type="submit"
                     class="w-full text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-500"
                   >
-                    Iniciar sessió
+                    Registra't
                   </button>
                   <div class="flex items-start">
                     <div class="ml-3 text-sm">
                       <label for="remember" class="text-font-50 dark:text-font-50">
-                        ¿Tens compte?
+                        Tens compte?
                         <nuxt-link to="/" class="text-sm mb-2 text-green-500 hover:underline dark:text-green-500">
                           Inicia sessió
                         </nuxt-link>
@@ -151,7 +151,8 @@ const repeatPassword = ref('')
 const router = useRouter()
 const user = useUser()
 const errorMessage = ref('')
-const endpoint = 'http://new_wordle.test/api/register'
+const config = useRuntimeConfig();
+const endpoint = config.public.apiBase +'/register'
 
 
 async function register() {

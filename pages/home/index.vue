@@ -7,8 +7,9 @@
       >
         <h1 class="text-4xl font-bold mb-4">¡Benvingut a WORDLE IBC!</h1>
         <p class="text-lg mb-6">
-          Ens alegra veure't aqui, {{ name }}
-          Que vols fer?
+          Ens alegra veure't aqui, {{ name }}.
+          <br>
+          Què vols fer?
         </p>
         <div>
           <button

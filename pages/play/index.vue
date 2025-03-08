@@ -32,7 +32,7 @@
       </div>
 
       <div class="mt-6">
-        <input v-model="currentWord" readonly type="text" maxlength="5" placeholder="Introduce tu palabra"
+        <input v-model="currentWord" readonly type="text" maxlength="5" placeholder="Introdueix la paraula"
           class="w-64 h-12 text-center text-2xl font-bold bg-gray-800 text-white border-2 border-white rounded-lg"
           :disabled="isWordSubmitted ||
             currentWord.length === 5 ||
@@ -136,7 +136,7 @@ const showInfo = () => {
       <ul>
         <li>🟩 Verd: La lletra és correcta i està ben col·locada.</li>
         <li>🟨 Groc: La lletra està a la paraula, però en una posició diferent.</li>
-        <li>⬜ Gris: La lletra no està a la paraula.</li>
+        <li>⬛ Gris: La lletra no està a la paraula.</li>
       </ul>
     </ul>
     <p><strong>⚠️ Regles:</strong></p>
@@ -157,11 +157,11 @@ const showStats = async () => {
 
   if (stats.totalStats > 0) {
     Swal.fire({
-      title: "¡Estadísticas!",
+      title: "Estadístiques!",
       html: `<ul>
-            <li>Total Stats: ${stats.totalStats}</li>
-            <li>Completats: ${stats.completedCount}</li>
-            <li>No Completats: ${stats.notCompletedCount}</li>
+            <li>Partides totals: ${stats.totalStats}</li>
+            <li>Completades: ${stats.completedCount}</li>
+            <li>No completades: ${stats.notCompletedCount}</li>
             <li>Temps més ràpid: ${stats.fastestCompletionTime != null ? stats.fastestCompletionTime + ' segons' : 'No hi ha registres'}</li>
             <li>Mitjana de temps: ${stats.averageCompletionTime} segons</li>
             <li>Millor partida: ${stats.minUsedAttempts == 1

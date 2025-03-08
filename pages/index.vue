@@ -13,7 +13,7 @@
             <div class="space-y-4 md:space-y-6">
               <div>
                 <h1 class="text-2xl leading-9 tracking-tight text-font-50 md:text-2xl text-gray-500 dark:text-white">
-                  Benvingut
+                  Benvingut/da
                 </h1>
                 <p class="text-sm font-light text-gray-500 pt-2 dark:text-gray-400">
                   Inicia sessió per accedir al teu compte
@@ -21,7 +21,7 @@
               </div>
               <form class="space-y-4 md:space-y-6" @submit.prevent="login">
                 <div>
-                  <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correu electrónic</label>
+                  <label for="email" class="block mb-2 text-sm text-font-50 dark:text-white">Correu electrònic</label>
                   <input
                     id="email"
                     v-model="email"
@@ -33,7 +33,7 @@
                   />
                 </div>
                 <div>
-                  <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contrasenya</label>
+                  <label for="password" class="block mb-2 text-sm text-font-50 dark:text-white">Contrassenya</label>
                   <input
                     id="password"
                     v-model="password"
@@ -53,7 +53,7 @@
                 <div class="flex items-start">
                   <div class="ml-3 text-sm">
                     <label for="remember" class="text-font-50 dark:text-font-50">
-                      ¿No tens compte?
+                      No tens compte?
                       <nuxt-link to="/register" class="text-sm mb-2 text-green-500 hover:underline dark:text-green-700">
                         Registra't
                       </nuxt-link>
