@@ -252,6 +252,30 @@ const checkWord = () => {
   });
 
   word.split("").forEach((letter, index) => {
+    if (keyDataValues.value[letter] === undefined) {
+      keyDataValues.value[letter] = 0;
+    }
+
+    if (letter === wordToGuess.value[index]) {
+      if (keyDataValues.value[letter] < 3) {
+        keyColors.value[letter] = "bg-green-500";
+        keyDataValues.value[letter] = 3;
+      }
+      correct++;
+    } else if (wordToGuess.value.includes(letter)) {
+      if (keyDataValues.value[letter] < 2) {
+        keyColors.value[letter] = "bg-yellow-500";
+        keyDataValues.value[letter] = 2;
+      }
+    } else {
+      if (keyDataValues.value[letter] < 1) {
+        keyColors.value[letter] = "bg-gray-500";
+        keyDataValues.value[letter] = 1;
+      }
+    }
+  });
+
+  word.split("").forEach((letter, index) => {
     if (letter === wordToGuessArray[index]) {
       letterColors.value[currentRowIndex.value - 1][index] = "bg-green-500";
       marked[index] = true; 
