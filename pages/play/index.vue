@@ -279,7 +279,6 @@ const checkWord = () => {
     if (letter === wordToGuessArray[index]) {
       letterColors.value[currentRowIndex.value - 1][index] = "bg-green-500";
       marked[index] = true; 
-      correct++;
       orangeCount[letter]--; 
     }
   });
